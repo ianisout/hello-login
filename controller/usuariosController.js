@@ -1,14 +1,15 @@
-const usuariosModel = require("../model/usuariosModel");
-const bcryptjs = require("bcryptjs");
-const fs = require("fs");
+const bcryptjs = require('bcryptjs');
+const usuariosModel = require('../model/usuariosModel');
 
-exports.cadastrar = ({ nome, email, senha, confirma }) => {
+exports.cadastrar = ({
+  nome, email, senha, confirma,
+}) => {
   if (senha !== confirma) {
-    throw new Error("As senhas não conferem");
+    throw new Error('As senhas não conferem');
   }
 
-  if (usuariosModel.findByEmail({email})) {
-    throw new Error('Usuario ja cadastrado')
+  if (usuariosModel.findByEmail({ email })) {
+    throw new Error('Usuario ja cadastrado');
   }
 
   const hashed = bcryptjs.hashSync(senha);
@@ -18,12 +19,12 @@ exports.cadastrar = ({ nome, email, senha, confirma }) => {
 exports.logar = ({ email, senha }) => {
   const usuarioSalvo = usuariosModel.findByEmail({ email });
 
-  if (usuarioSalvo === undefined) {
-    throw new Error("Usuario nao cadastrado");
+  if (!usuarioSalvo) {
+    throw new Error('Usuario nao cadastrado');
   }
 
   if (!bcryptjs.compareSync(senha, usuarioSalvo.hashed)) {
-    throw new Error("Senha invalida");
+    throw new Error('Senha invalida');
   }
 
   return usuarioSalvo;
