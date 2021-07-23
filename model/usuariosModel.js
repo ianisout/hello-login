@@ -1,7 +1,6 @@
-const fs = require("fs");
-const usuarios = require("../database/usuarios.json");
-const usuariosController = require("../controller/usuariosController");
-const { v4 } = require("uuid");
+const fs = require('fs');
+const { v4 } = require('uuid');
+const usuarios = require('../database/usuarios.json');
 
 exports.novoUsuario = ({ nome, email, hashed }) => {
   const id = v4();
@@ -14,13 +13,13 @@ exports.novoUsuario = ({ nome, email, hashed }) => {
 
   usuarios.push(usuario);
 
-  fs.writeFileSync("./database/usuarios.json", JSON.stringify(usuarios));
+  fs.writeFileSync('./database/usuarios.json', JSON.stringify(usuarios));
 
   return usuario;
 };
 
 exports.findByEmail = ({ email }) => {
-  let usuario = usuarios.find((usuario) => usuario.email === email);
+  const usuario = usuarios.find((item) => item.email === email);
 
   return usuario;
 };
