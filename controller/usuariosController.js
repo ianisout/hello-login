@@ -27,5 +27,9 @@ exports.logar = ({ email, senha }) => {
     throw new Error('Senha invalida');
   }
 
+  /**
+   * You should never return the full object
+   */
+  
   return usuarioSalvo;
 };

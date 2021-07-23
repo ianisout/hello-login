@@ -50,18 +50,23 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   const { email, senha } = req.body;
   const { session } = req;
+
+  /**
+   * The estouLogadoCorretamente and the verify of it is convaluted.
+   */
+
   let estouLogadoCorretamente = false;
 
   if (usuariosController.logar({ email, senha })) {
-    estouLogadoCorretamente = true;
+    estouLogadoCorretamente = true; // A empty line after that one would be great.
     res.render('index', {
       title: 'logado',
       session,
-      sessionId: session.id,
+      sessionId: session.id, // You could have destructured the sessionId renaming the variable name
       estouLogadoCorretamente,
     });
   }
-  // res.render("Logado com sucesso");
+  // res.render("Logado com sucesso"); // You should never leave comments like that on your code.
 });
 
 module.exports = router;

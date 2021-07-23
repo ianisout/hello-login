@@ -18,6 +18,12 @@ exports.novoUsuario = ({ nome, email, hashed }) => {
   return usuario;
 };
 
+/**
+ * This could be an arrow function
+ *
+ * exports.findByEmail = ({ email }) => usuarios.find((item) => item.email === email);
+ */
+
 exports.findByEmail = ({ email }) => {
   const usuario = usuarios.find((item) => item.email === email);
 
